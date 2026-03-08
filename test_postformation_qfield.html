@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post-test Formation QField — PMER CRM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a5276;
+            --primary-light: #2471a3;
+            --accent: #c0392b;
+            --bg: #f4f6f7;
+            --card: #ffffff;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --success: #27ae60;
+            --warning: #e67e22;
+            --border: #dce1e7;
+            --green-bg: #eafaf1;
+            --red-bg: #fdedec;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background: linear-gradient(135deg, #f4f6f7 0%, #e8ecf0 100%);
+            min-height: 100vh;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .no-select {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 1.8rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(26,82,118,0.35);
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .header p { opacity: 0.9; font-size: 1rem; }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* ── WELCOME SCREEN ── */
+        .welcome-screen {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .welcome-screen h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            font-size: 1.7rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .welcome-screen .subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .rules-box {
+            background: #fef9e7;
+            border-left: 4px solid var(--warning);
+            padding: 1.4rem 1.6rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .rules-box h3 {
+            color: var(--warning);
+            margin-bottom: 0.8rem;
+        }
+
+        .rules-box ul { margin-left: 1.4rem; }
+        .rules-box li { margin-bottom: 0.4rem; }
+
+        .id-hint {
+            background: #eaf4fb;
+            border-left: 4px solid var(--primary-light);
+            padding: 1.2rem 1.6rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .id-hint h3 { color: var(--primary); margin-bottom: 0.6rem; }
+        .id-hint p { color: var(--text); font-size: 0.95rem; }
+        .id-hint .example {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.3rem 0.9rem;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+            letter-spacing: 0.04em;
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .checkbox-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+            cursor: pointer;
+        }
+
+        .checkbox-row input { margin-top: 0.3rem; transform: scale(1.3); flex-shrink: 0; }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border: none;
+            padding: 0.9rem 2.2rem;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26,82,118,0.4);
+        }
+
+        .btn-center { display: block; margin: 0 auto; }
+
+        /* ── TEST SCREEN ── */
+        .test-screen { display: none; }
+
+        .test-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .timer {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .timer.warning { color: var(--warning); animation: pulse 1s infinite; }
+        .timer.danger  { color: var(--accent);  animation: pulse 0.5s infinite; }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0.6; }
+        }
+
+        .progress-info { font-weight: 600; color: var(--text-light); }
+
+        .question-card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.3rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .question-number {
+            background: var(--primary);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .question-category {
+            background: #e8f4fb;
+            color: #1a5276;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+        }
+
+        .mcq-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .mcq-option {
+            display: flex;
+            align-items: center;
+            padding: 0.9rem 1.2rem;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .mcq-option:hover { border-color: var(--primary-light); background: #eaf4fb; }
+        .mcq-option.selected { border-color: var(--primary); background: #d6eaf8; }
+        .mcq-option input { margin-right: 1rem; transform: scale(1.3); }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            gap: 1rem;
+        }
+
+        .btn-secondary {
+            background: var(--card);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover { background: var(--primary); color: white; }
+        .btn-submit { background: linear-gradient(135deg, var(--success) 0%, #1e8449 100%); }
+
+        /* ── CHEAT ALERT ── */
+        .overlay {
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999; display: none;
+        }
+        .overlay.show { display: block; }
+
+        .cheat-alert {
+            position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem; border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            z-index: 1000; text-align: center; display: none;
+            max-width: 420px; width: 90%;
+        }
+        .cheat-alert.show { display: block; animation: shake 0.5s; }
+
+        @keyframes shake {
+            0%, 100% { transform: translate(-50%,-50%) rotate(0); }
+            25%       { transform: translate(-50%,-50%) rotate(-2deg); }
+            75%       { transform: translate(-50%,-50%) rotate(2deg); }
+        }
+
+        .cheat-alert .icon { font-size: 3.5rem; margin-bottom: 0.8rem; }
+        .cheat-alert h3 { color: var(--accent); margin-bottom: 0.8rem; }
+
+        /* ── END SCREEN ── */
+        .end-screen { display: none; }
+
+        .end-card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .end-card .big-icon { font-size: 5rem; margin-bottom: 1rem; }
+
+        .end-card h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-box {
+            margin: 2rem auto;
+            max-width: 340px;
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .score-box.success { background: var(--green-bg); border: 2px solid var(--success); }
+        .score-box.fail    { background: var(--red-bg);   border: 2px solid var(--accent); }
+
+        .score-number {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .score-box.success .score-number { color: var(--success); }
+        .score-box.fail    .score-number { color: var(--accent); }
+
+        .score-label { font-size: 1.1rem; color: var(--text-light); margin-top: 0.4rem; }
+
+        .mention {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .mention.pass { background: var(--success); color: white; }
+        .mention.fail { background: var(--accent);  color: white; }
+
+        .answers-review {
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        .answers-review h3 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .review-item {
+            padding: 1rem 1.2rem;
+            border-radius: 10px;
+            margin-bottom: 0.75rem;
+            border-left: 4px solid;
+        }
+
+        .review-item.correct { background: #eafaf1; border-color: var(--success); }
+        .review-item.wrong   { background: #fdedec; border-color: var(--accent); }
+        .review-item.skipped { background: #f4f6f7; border-color: var(--text-light); }
+
+        .review-q { font-weight: 600; margin-bottom: 0.4rem; font-size: 0.95rem; }
+        .review-answer { font-size: 0.9rem; }
+        .review-answer .your { color: var(--text-light); }
+        .review-answer .correct-ans { color: var(--success); font-weight: 600; }
+        .review-answer .wrong-ans   { color: var(--accent);  font-weight: 600; }
+
+        .participant-id-display {
+            margin-top: 1.5rem;
+            background: #f4f6f7;
+            border-radius: 8px;
+            padding: 0.8rem 1.2rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .participant-id-display strong { color: var(--primary); }
+
+        .watermark {
+            position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%,-50%) rotate(-30deg);
+            font-size: 8rem;
+            color: rgba(0,0,0,0.02);
+            pointer-events: none;
+            z-index: 0;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 640px) {
+            .test-header { flex-direction: column; gap: 0.8rem; }
+            .welcome-screen, .end-card { padding: 1.5rem; }
+            .header h1 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="watermark no-select">TEST CONFIDENTIEL</div>
+
+<!-- OVERLAY + CHEAT ALERT -->
+<div class="overlay" id="overlay"></div>
+<div class="cheat-alert" id="cheatAlert">
+    <div class="icon">⚠️</div>
+    <h3>Action non autorisée</h3>
+    <p id="cheatMessage">Le copier-coller est interdit pendant ce test.</p>
+    <p style="margin-top:0.8rem; color:var(--text-light); font-size:0.88rem;">Cet incident a été enregistré.</p>
+    <button class="btn" onclick="closeCheatAlert()" style="margin-top:1.2rem;">J'ai compris</button>
+</div>
+
+<!-- HEADER -->
+<header class="header no-select">
+    <h1>📋 Post-test Formation QField</h1>
+    <p>Équipe PMER CRM</p>
+</header>
+
+<div class="container">
+
+    <!-- ══════════ ÉCRAN D'ACCUEIL ══════════ -->
+    <div class="welcome-screen" id="welcomeScreen">
+        <h2>Bienvenue au test d'évaluation</h2>
+        <p class="subtitle">Ce test mesure vos acquis après la formation QGIS / QField.</p>
+
+        <div class="rules-box no-select">
+            <h3>⚠️ Règles importantes</h3>
+            <ul>
+                <li><strong>Copier-coller interdit</strong> — Toute tentative est détectée et enregistrée</li>
+                <li><strong>Restez sur cette page</strong> — Les changements d'onglet sont surveillés</li>
+                <li><strong>Pas d'IA ni de ressources externes</strong> — Répondez par vous-même</li>
+                <li><strong>Durée : 15 minutes</strong> — Le test se soumet automatiquement à la fin</li>
+                <li><strong>15 questions</strong> — Seuil de réussite : 10/15</li>
+            </ul>
+        </div>
+
+        <form id="startForm" onsubmit="startTest(event)">
+            <div class="form-group">
+                <label for="participantId">Votre identifiant *</label>
+                <input type="text" id="participantId" required
+                       placeholder="Entrez votre identifiant"
+                       minlength="2" maxlength="30"
+                       autocomplete="off">
+            </div>
+
+            <label class="checkbox-row">
+                <input type="checkbox" id="acceptRules" required>
+                <span>J'accepte les règles du test et je m'engage à répondre par moi-même, sans aide extérieure.</span>
+            </label>
+
+            <button type="submit" class="btn btn-center">🚀 Commencer le test</button>
+        </form>
+    </div>
+
+    <!-- ══════════ ÉCRAN DE TEST ══════════ -->
+    <div class="test-screen" id="testScreen">
+        <div class="test-header no-select">
+            <div class="timer" id="timer">
+                <span>⏱️</span>
+                <span id="timeDisplay">15:00</span>
+            </div>
+            <div class="progress-info">
+                Question <span id="currentQ">1</span> / <span id="totalQ">15</span>
+            </div>
+        </div>
+
+        <div id="questionContainer"></div>
+
+        <div class="nav-buttons">
+            <button class="btn btn-secondary" id="prevBtn" onclick="previousQuestion()">← Précédent</button>
+            <button class="btn" id="nextBtn" onclick="nextQuestion()">Suivant →</button>
+            <button class="btn btn-submit" id="submitBtn" onclick="confirmSubmit()" style="display:none;">✓ Terminer le test</button>
+        </div>
+    </div>
+
+    <!-- ══════════ ÉCRAN DE FIN ══════════ -->
+    <div class="end-screen" id="endScreen">
+        <div class="end-card">
+            <div class="big-icon" id="endIcon">🎉</div>
+            <h2 id="endTitle">Test terminé !</h2>
+            <p id="endSubtitle" style="color:var(--text-light);">Voici votre résultat.</p>
+
+            <div class="score-box" id="scoreBox">
+                <div class="score-number" id="scoreNumber">—</div>
+                <div class="score-label">sur 15 questions</div>
+                <div class="mention" id="mentionBadge">—</div>
+            </div>
+
+            <div class="participant-id-display">
+                Identifiant participant : <strong id="displayId">—</strong>
+            </div>
+
+            <!-- Correction détaillée -->
+            <div class="answers-review" id="answersReview">
+                <h3>📝 Correction détaillée</h3>
+                <div id="reviewList"></div>
+            </div>
+        </div>
+    </div>
+
+</div><!-- /container -->
+
+<script>
+// ╔══════════════════════════════════════════════════════════╗
+// ║              ZONE DE CONFIGURATION                        ║
+// ╚══════════════════════════════════════════════════════════╝
+
+const TEST_DURATION_MINUTES = 15;
+
+const questions = [
+    {
+        id: 1,
+        category: 'Concepts SIG',
+        question: "Que signifie l'acronyme SIG ?",
+        options: [
+            "A. Système d'Identification Géographique",
+            "B. Système d'Information Géographique",
+            "C. Système d'Information Générale",
+            "D. Service d'Information Géospatiale"
+        ],
+        correctAnswer: 1
+    },
+    {
+        id: 2,
+        category: 'Concepts SIG',
+        question: "Parmi les éléments suivants, lequel N'EST PAS une composante d'un SIG ?",
+        options: [
+            "A. Données spatiales",
+            "B. Logiciel de traitement",
+            "C. Réseau social",
+            "D. Personnel qualifié"
+        ],
+        correctAnswer: 2
+    },
+    {
+        id: 3,
+        category: 'Concepts SIG',
+        question: "Quels sont les trois types de géométries vectorielles de base ?",
+        options: [
+            "A. Points, cercles, rectangles",
+            "B. Points, lignes, polygones",
+            "C. Points, courbes, surfaces",
+            "D. Vecteurs, rasters, images"
+        ],
+        correctAnswer: 1
+    },
+    {
+        id: 4,
+        category: 'QField & Installation',
+        question: "Sur quel type d'appareil QField est-il principalement utilisé ?",
+        options: [
+            "A. Ordinateur de bureau uniquement",
+            "B. Tablette uniquement",
+            "C. Smartphone et tablette",
+            "D. Serveur web"
+        ],
+        correctAnswer: 2
+    },
+    {
+        id: 5,
+        category: 'QField & Installation',
+        question: "Quelle est la différence principale entre QGIS et QField ?",
+        options: [
+            "A. QGIS est payant, QField est gratuit",
+            "B. QGIS est pour le bureau, QField est pour mobile",
+            "C. QGIS ne peut pas créer de cartes",
+            "D. Il n'y a aucune différence"
+        ],
+        correctAnswer: 1
+    },
+    {
+        id: 6,
+        category: 'QField & Installation',
+        question: "Depuis quelle plateforme peut-on installer QField sur Android ?",
+        options: [
+            "A. App Store d'Apple",
+            "B. Windows Store",
+            "C. Google Play Store",
+            "D. QField ne peut pas être installé"
+        ],
+        correctAnswer: 2
+    },
+    {
+        id: 7,
+        category: 'Contexte local',
+        question: "Qu'est-ce qu'un fokontany ?",
+        options: [
+            "A. Une application mobile",
+            "B. Une subdivision administrative à Madagascar",
+            "C. Un type de carte géographique",
+            "D. Un format de fichier SIG"
+        ],
+        correctAnswer: 1
+    },
+    {
+        id: 8,
+        category: 'Géométries',
+        question: "Quel type de géométrie utiliseriez-vous pour représenter l'emplacement d'un puits ?",
+        options: [
+            "A. Une ligne",
+            "B. Un polygone",
+            "C. Un point",
+            "D. Un cercle"
+        ],
+        correctAnswer: 2
+    },
+    {
+        id: 9,
+        category: 'Géométries',
+        question: "Quel type de géométrie utiliseriez-vous pour représenter une route ?",
+        options: [
+            "A. Un point",
+            "B. Une ligne",
+            "C. Un polygone",
+            "D. Un carré"
+        ],
+        correctAnswer: 1
+    },
+    {
+        id: 10,
+        category: 'Géométries',
+        question: "Quel type de géométrie utiliseriez-vous pour représenter une parcelle de terrain ?",
+        options: [
+            "A. Un point",
+            "B. Une ligne",
+            "C. Un polygone",
+            "D. Un trait"
+        ],
+        correctAnswer: 2
+    },
+    {
+        id: 11,
+        category: 'Mode hors ligne',
+        question: "Que signifie \"travailler hors ligne\" dans QField ?",
+        options: [
+            "A. L'application ne fonctionne pas",
+            "B. On peut collecter des données sans connexion Internet",
+            "C. On doit être connecté en permanence",
+            "D. Les données sont automatiquement supprimées"
+        ],
+        correctAnswer: 1
+    },
+    {
+        id: 12,
+        category: 'Mode hors ligne',
+        question: "Quel est le principal avantage d'un fond de carte hors ligne ?",
+        options: [
+            "A. Il consomme plus de batterie",
+            "B. Il fonctionne sans connexion Internet",
+            "C. Il est moins précis",
+            "D. Il ne peut pas être utilisé"
+        ],
+        correctAnswer: 1
+    },
+    {
+        id: 13,
+        category: 'Gestion des données',
+        question: "Que faut-il faire après avoir collecté des données sur le terrain avec QField ?",
+        options: [
+            "A. Supprimer immédiatement les données",
+            "B. Synchroniser et sauvegarder les données",
+            "C. Désinstaller l'application",
+            "D. Rien, les données sont perdues"
+        ],
+        correctAnswer: 1
+    },
+    {
+        id: 14,
+        category: 'GPS',
+        question: "Quelle est la fonction principale du GPS dans QField ?",
+        options: [
+            "A. Envoyer des messages",
+            "B. Localiser précisément sa position sur la carte",
+            "C. Prendre des photos",
+            "D. Calculer des statistiques"
+        ],
+        correctAnswer: 1
+    },
+    {
+        id: 15,
+        category: 'Gestion des données',
+        question: "Parmi ces formats, lequel peut être utilisé pour exporter des données depuis QField ?",
+        options: [
+            "A. PDF uniquement",
+            "B. Word uniquement",
+            "C. GeoPackage, Shapefile, CSV",
+            "D. MP3"
+        ],
+        correctAnswer: 2
+    }
+];
+
+// ╔══════════════════════════════════════════════════════════╗
+// ║         FIN ZONE DE CONFIGURATION                         ║
+// ╚══════════════════════════════════════════════════════════╝
+
+const TEST_DURATION = TEST_DURATION_MINUTES * 60;
+let currentQuestion = 0;
+let answers = {};
+let timeRemaining = TEST_DURATION;
+let timerInterval;
+let startTime;
+let participantId = '';
+
+let stats = {
+    copyAttempts: 0,
+    pasteAttempts: 0,
+    tabSwitches: 0,
+    rightClicks: 0,
+    keyboardShortcuts: 0,
+    focusLost: 0
+};
+
+// ── SURVEILLANCE ANTI-TRICHE ──
+
+document.addEventListener('copy', function(e) {
+    if (document.getElementById('testScreen').style.display !== 'none') {
+        e.preventDefault();
+        stats.copyAttempts++;
+        showCheatAlert('Le copier est interdit pendant ce test.');
+    }
+});
+
+document.addEventListener('cut', function(e) {
+    if (document.getElementById('testScreen').style.display !== 'none') {
+        e.preventDefault();
+        stats.copyAttempts++;
+        showCheatAlert('Le couper est interdit pendant ce test.');
+    }
+});
+
+document.addEventListener('paste', function(e) {
+    if (document.getElementById('testScreen').style.display !== 'none') {
+        e.preventDefault();
+        stats.pasteAttempts++;
+        showCheatAlert('Le coller est interdit pendant ce test.');
+    }
+});
+
+document.addEventListener('contextmenu', function(e) {
+    if (document.getElementById('testScreen').style.display !== 'none') {
+        e.preventDefault();
+        stats.rightClicks++;
+    }
+});
+
+document.addEventListener('keydown', function(e) {
+    if (document.getElementById('testScreen').style.display !== 'none') {
+        if (e.ctrlKey && ['c','v','x','a','u'].includes(e.key.toLowerCase())) {
+            e.preventDefault();
+            stats.keyboardShortcuts++;
+            showCheatAlert('Les raccourcis clavier de copier-coller sont désactivés.');
+        }
+        if (e.key === 'F12') { e.preventDefault(); }
+    }
+});
+
+document.addEventListener('visibilitychange', function() {
+    if (document.getElementById('testScreen').style.display !== 'none') {
+        if (document.hidden) { stats.tabSwitches++; }
+    }
+});
+
+window.addEventListener('blur', function() {
+    if (document.getElementById('testScreen').style.display !== 'none') {
+        stats.focusLost++;
+    }
+});
+
+function showCheatAlert(message) {
+    document.getElementById('cheatMessage').textContent = message;
+    document.getElementById('cheatAlert').classList.add('show');
+    document.getElementById('overlay').classList.add('show');
+}
+
+function closeCheatAlert() {
+    document.getElementById('cheatAlert').classList.remove('show');
+    document.getElementById('overlay').classList.remove('show');
+}
+
+// ── DÉMARRAGE DU TEST ──
+
+function startTest(e) {
+    e.preventDefault();
+    participantId = document.getElementById('participantId').value.trim().toUpperCase();
+    if (!participantId) return;
+
+    document.getElementById('welcomeScreen').style.display = 'none';
+    document.getElementById('testScreen').style.display = 'block';
+    document.getElementById('totalQ').textContent = questions.length;
+
+    renderQuestion();
+    startTimer();
+}
+
+// ── TIMER ──
+
+function formatTime(seconds) {
+    const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+    const s = (seconds % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+}
+
+function startTimer() {
+    startTime = new Date();
+    document.getElementById('timeDisplay').textContent = formatTime(timeRemaining);
+
+    timerInterval = setInterval(function() {
+        timeRemaining--;
+        document.getElementById('timeDisplay').textContent = formatTime(timeRemaining);
+
+        const timerEl = document.getElementById('timer');
+        if (timeRemaining <= 120) {
+            timerEl.className = 'timer danger';
+        } else if (timeRemaining <= 300) {
+            timerEl.className = 'timer warning';
+        }
+
+        if (timeRemaining <= 0) {
+            clearInterval(timerInterval);
+            submitTest(true);
+        }
+    }, 1000);
+}
+
+// ── RENDU DES QUESTIONS ──
+
+function renderQuestion() {
+    const q = questions[currentQuestion];
+    const container = document.getElementById('questionContainer');
+
+    let html = `
+        <div class="question-card">
+            <div class="question-header">
+                <span class="question-number">Question ${q.id} / ${questions.length}</span>
+                <span class="question-category">${q.category}</span>
+            </div>
+            <div class="question-text no-select">${q.question}</div>
+            <div class="mcq-options">
+    `;
+
+    q.options.forEach((option, index) => {
+        const isSelected = answers[q.id] === index;
+        html += `
+            <label class="mcq-option ${isSelected ? 'selected' : ''}" onclick="selectMCQ(${q.id}, ${index})">
+                <input type="radio" name="q${q.id}" ${isSelected ? 'checked' : ''}>
+                <span>${option}</span>
+            </label>
+        `;
+    });
+
+    html += `</div></div>`;
+    container.innerHTML = html;
+
+    document.getElementById('currentQ').textContent = currentQuestion + 1;
+    document.getElementById('prevBtn').style.display   = currentQuestion === 0 ? 'none' : 'inline-block';
+    document.getElementById('nextBtn').style.display   = currentQuestion === questions.length - 1 ? 'none' : 'inline-block';
+    document.getElementById('submitBtn').style.display = currentQuestion === questions.length - 1 ? 'inline-block' : 'none';
+}
+
+function selectMCQ(questionId, optionIndex) {
+    answers[questionId] = optionIndex;
+    renderQuestion();
+}
+
+function nextQuestion() {
+    if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        renderQuestion();
+    }
+}
+
+function previousQuestion() {
+    if (currentQuestion > 0) {
+        currentQuestion--;
+        renderQuestion();
+    }
+}
+
+function confirmSubmit() {
+    if (confirm('Êtes-vous sûr de vouloir terminer le test ? Cette action est irréversible.')) {
+        submitTest(false);
+    }
+}
+
+// ── SOUMISSION & RÉSULTATS ──
+
+function submitTest(isAutoSubmit) {
+    clearInterval(timerInterval);
+
+    // Calcul du score
+    let score = 0;
+    questions.forEach(q => {
+        if (answers[q.id] === q.correctAnswer) score++;
+    });
+
+    const passed = score >= 10;
+
+    // Masquer l'écran de test, afficher fin
+    document.getElementById('testScreen').style.display = 'none';
+    document.getElementById('endScreen').style.display  = 'block';
+
+    // Titre
+    document.getElementById('endTitle').textContent = isAutoSubmit ? 'Temps écoulé !' : 'Test terminé !';
+    document.getElementById('endIcon').textContent = passed ? '🎉' : '📋';
+    document.getElementById('endSubtitle').textContent = isAutoSubmit
+        ? 'Le test a été soumis automatiquement. Voici votre résultat.'
+        : 'Voici votre résultat.';
+
+    // Score box
+    const scoreBox = document.getElementById('scoreBox');
+    scoreBox.className = 'score-box ' + (passed ? 'success' : 'fail');
+    document.getElementById('scoreNumber').textContent = score + '/15';
+
+    const mention = document.getElementById('mentionBadge');
+    if (score === 15)        { mention.textContent = '⭐ Excellent'; mention.className = 'mention pass'; }
+    else if (score >= 13)    { mention.textContent = '✅ Très bien';  mention.className = 'mention pass'; }
+    else if (score >= 10)    { mention.textContent = '✅ Réussi';     mention.className = 'mention pass'; }
+    else if (score >= 7)     { mention.textContent = '❌ Insuffisant'; mention.className = 'mention fail'; }
+    else                     { mention.textContent = '❌ À refaire';  mention.className = 'mention fail'; }
+
+    // Enregistrer le résultat sur le serveur
+    const mentionText = score === 15 ? 'Excellent' : score >= 13 ? 'Très bien' : score >= 10 ? 'Réussi' : score >= 7 ? 'Insuffisant' : 'À refaire';
+    fetch('save_result.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            identifiant: participantId,
+            score: score,
+            total: questions.length,
+            mention: mentionText,
+            soumission: isAutoSubmit ? 'Auto (temps écoulé)' : 'Manuel',
+            violations: stats.copyAttempts + stats.pasteAttempts + stats.tabSwitches + stats.keyboardShortcuts
+        })
+    }).catch(() => {});
+
+    // Identifiant
+    document.getElementById('displayId').textContent = participantId;
+
+    // Correction détaillée
+    let reviewHTML = '';
+    questions.forEach(q => {
+        const given   = answers[q.id];
+        const correct = q.correctAnswer;
+        const isCorrect = given === correct;
+        const isSkipped = given === undefined;
+
+        let cssClass = isSkipped ? 'skipped' : (isCorrect ? 'correct' : 'wrong');
+        let icon = isSkipped ? '⬜' : (isCorrect ? '✅' : '❌');
+
+        let answerLine = '';
+        if (isSkipped) {
+            answerLine = `<span class="your">Non répondu</span> — <span class="correct-ans">Bonne réponse : ${q.options[correct]}</span>`;
+        } else if (isCorrect) {
+            answerLine = `<span class="correct-ans">✓ ${q.options[correct]}</span>`;
+        } else {
+            answerLine = `<span class="wrong-ans">✗ Votre réponse : ${q.options[given]}</span><br>
+                          <span class="correct-ans">✓ Bonne réponse : ${q.options[correct]}</span>`;
+        }
+
+        reviewHTML += `
+            <div class="review-item ${cssClass}">
+                <div class="review-q">${icon} Q${q.id} — ${q.question}</div>
+                <div class="review-answer">${answerLine}</div>
+            </div>
+        `;
+    });
+
+    document.getElementById('reviewList').innerHTML = reviewHTML;
+}
+</script>
+</body>
+</html>
